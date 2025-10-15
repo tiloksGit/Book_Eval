@@ -21,6 +21,12 @@ const addNewStudent = asyncHandler(async (req, res) => {
     return res.status(409).json({ message: "Duplicate found" });
   }
 
+  const guideId = Guide.findOne({name : guide}).lean().exec();
+
+  if(!guideId){
+    return res.status(404).json({success: false, message: "Guide doesn't exist"})
+  }
+
   const hashedPasswd = await bcrypt.hash(password, 10);
   //Store the newUser
   const newUser = {
@@ -29,7 +35,7 @@ const addNewStudent = asyncHandler(async (req, res) => {
     password: hashedPasswd,
     emailID,
     dept,
-    guide,
+    guide: guideId._id,
   };
 
   //create user
@@ -44,13 +50,14 @@ const addNewStudent = asyncHandler(async (req, res) => {
 
 
 const addNewGuide = asyncHandler(async (req, res) => {
-  const { rollNo, emailID, name, password, dept, guide} = req.body;
+  const { emailID, name, password, dept, panel_number } = req.body;
+  console.log(emailID, name, password, dept, panel_number)
   let avatarURL = "";
   if (req.file) {
     avatarURL = req.file.path;
   }
   //confirm data 
-  if (!name|| !password || !dept || !rollNo || !emailID || !guide) {
+  if (!name|| !password || !dept || !emailID || !panel_number) {
     return res.status(400).json({ message: "All fields are required" });
   }
   //check for duplicates
@@ -64,11 +71,10 @@ const addNewGuide = asyncHandler(async (req, res) => {
   //Store the newUser
   const newUser = {
     name,
-    rollNo,
     password: hashedPasswd,
     emailID,
     dept,
-    guide,
+    panel_number
   };
 
   //create user

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const guideSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
-    // avatarURL: { type: String },
     emailID: {
       type: String,
       required: true,
@@ -21,9 +20,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    panel_number: {
+      type: Number,
+      required: true
+    },
     freeSlots: {
       type: String,
-      required: true,
+      required: false,
     }
   },
 
@@ -32,4 +35,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Guide", userSchema);
+module.exports = mongoose.model("Guide", guideSchema);

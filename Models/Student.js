@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 // const  Guide = require("./Guide");
 
-const userSchema = new mongoose.Schema(
+const studentSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -26,12 +26,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    panel_number: {
+      type: Number,
+      required: true
+    },
     Guide : {
-        emailId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Guide",
-        },
-        required: true
+          required: true
       },
   },
 
@@ -40,4 +42,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Student", userSchema);
+module.exports = mongoose.model("Student", studentSchema);
