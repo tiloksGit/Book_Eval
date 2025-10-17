@@ -5,13 +5,13 @@ const panelSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    members: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Guide",
-            required: true
-        },
-    ]
+    members:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Guide",
+                required: true
+            },
+        ]
 })
 
 

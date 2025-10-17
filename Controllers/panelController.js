@@ -17,14 +17,13 @@ const addPanel = asyncHandler( async (req,res) => {
     }
 
     let members = []
-    Members.forEach( async guide => {
-        console.log(guide)
+    for(const guide of Members){
         const gde = await Guide.findOne({emailID : guide}).lean().exec()
         if(!gde){
             return res.status(404).json({success: false, message: `${guide} not yet registered`})
         }
         members.push(gde._id)
-    });
+    };
     
     if(members.length){
     const panel = {

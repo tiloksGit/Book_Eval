@@ -4,7 +4,9 @@ const app = express()
 const dbCon = require("./config/dbCon")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
+const cors = require("cors")
 app.use(express.json())
+
 
 const PORT = 8080
 
@@ -13,6 +15,7 @@ app.get("/",(res,req) => {
     req.send("Server is up")    
 })
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/register", require("./Routes/registerRoute"))
 
