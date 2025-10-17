@@ -30,7 +30,7 @@ const studentSchema = new mongoose.Schema(
       type: Number,
       required: true
     },
-    Guide : {
+    guide : {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Guide",
           required: true
